@@ -9,11 +9,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Smoke {
+public class SmokeBR {
 	
 	private WebDriver driver;
-	MethodsRep methodsRep = new MethodsRep();
-
+	MethodsRepBR methodsRep = new MethodsRepBR();
+	
 	@Before
 	public void setUp() throws Exception {
 		
@@ -25,7 +25,7 @@ public class Smoke {
 	@After
 	public void tearDown() throws Exception {
 		//check confirmation text
-		assertTrue("Submit was not sent",((driver.findElement(By.xpath("/html"))).getText()).contains("Information sent successfully!"));
+		assertTrue("Submit was not sent",((driver.findElement(By.xpath("/html"))).getText()).contains("Informações enviadas com sucesso!"));
 		driver.quit();
 		
 	}
@@ -36,6 +36,10 @@ public class Smoke {
 		//open site
 		driver.get("https://forms.liferay.com/web/forms/shared/-/form/122548");
 		driver.manage().window().maximize();
+		
+		//change to PT-BR
+		methodsRep.changeLang(driver);
+		driver.navigate().refresh();
 		
 		//check if "party rock" is present
 		assertTrue("'party rock' was not found",((driver.findElement(By.xpath("/html"))).getText()).contains("party rock"));

@@ -9,10 +9,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class RequiredAnswer {
+public class RequiredAnswerBR {
 
 	private WebDriver driver;
-	MethodsRep methodsRep = new MethodsRep();
+	MethodsRepBR methodsRep = new MethodsRepBR();
 
 	@Before
 	public void setUp() throws Exception {
@@ -24,14 +24,14 @@ public class RequiredAnswer {
 	public void tearDown() throws Exception {
 		
 		//check form was not submited with empty fields
-		assertFalse("Form was submited with empty fields",((driver.findElement(By.xpath("/html"))).getText()).contains("Information sent successfully!"));
+		assertFalse("Form was submited with empty fields",((driver.findElement(By.xpath("/html"))).getText()).contains("Informações enviadas com sucesso!"));
 		
 		//check "name" and "date" are warning about the Required info
-		assertTrue("'Required name' is missing",((driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/div/form/div[3]/div/div/div/div[1]/div/div/div[1]/div[1]/div/div/div"))).getText()).contains("This field is required."));
-		assertTrue("'Required date' is missing",((driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/div/form/div[3]/div/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div"))).getText()).contains("This field is required."));
+		assertTrue("'Required name' is missing",((driver.findElement(By.cssSelector(".col-md-7 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
+		assertTrue("'Required date' is missing",((driver.findElement(By.cssSelector(".col-md-5 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
 		
 		//check "answer" is not warning
-		assertFalse("'Required answer' should not appear",((driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/div/form/div[3]/div/div/div/div[1]/div/div/div[2]/div"))).getText()).contains("This field is required."));
+		assertFalse("'Required answer' should not appear",((driver.findElement(By.cssSelector(".col-md-12 > .form-group .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
 		
 		driver.quit();
 	}
@@ -42,6 +42,10 @@ public class RequiredAnswer {
 		//open site
 		driver.get("https://forms.liferay.com/web/forms/shared/-/form/122548");
 		driver.manage().window().maximize();
+		
+		//change to PT-BR
+		methodsRep.changeLang(driver);
+		driver.navigate().refresh();
 		
 		
 		//1. try to submit without fill answer field
@@ -55,9 +59,14 @@ public class RequiredAnswer {
 		methodsRep.submitForm(driver);
 		
 		//check form was not submited with empty fields
-		assertFalse("Form was submited with empty fields",((driver.findElement(By.xpath("/html"))).getText()).contains("Information sent successfully!"));
+		assertFalse("Form was submited with empty fields",((driver.findElement(By.xpath("/html"))).getText()).contains("Informações enviadas com sucesso!"));
 		
-		assertTrue("'Required answer' is missing",((driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/div/form/div[3]/div/div/div/div[1]/div/div/div[2]/div"))).getText()).contains("This field is required."));
+		//check answer is not warning
+		assertTrue("'Required answer' is missing",((driver.findElement(By.cssSelector(".col-md-12 > .form-group .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
+		
+		//check name and date warnings
+		assertFalse("'Required name' should not appear",((driver.findElement(By.cssSelector(".col-md-7 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
+		assertFalse("'Required date' should not appear",((driver.findElement(By.cssSelector(".col-md-5 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
 		
 		// 2. Clear "name" and "date" fields and try to submit form only with "answer" field filled
 		

@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class RequiredFields {
 
 	private WebDriver driver;
+	MethodsRep methodsRep = new MethodsRep();
 
 	@Before
 	public void setUp() throws Exception {
@@ -37,10 +38,7 @@ public class RequiredFields {
 		driver.get("https://forms.liferay.com/web/forms/shared/-/form/122548");
 		driver.manage().window().maximize();
 		
-		//submit form
-		driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div/div/form/div[3]/div/div/div/div[2]/button")).click();
-		Thread.sleep(1000);
-		
+		methodsRep.submitForm(driver);
 	}
 
 }

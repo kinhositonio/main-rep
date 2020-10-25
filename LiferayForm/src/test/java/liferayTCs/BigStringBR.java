@@ -9,9 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class BigString {
+public class BigStringBR {
 	
-	MethodsRep methodsRep = new MethodsRep();
+	MethodsRepBR methodsRep = new MethodsRepBR();
 
 	private WebDriver driver;
 
@@ -24,7 +24,7 @@ public class BigString {
 	@After
 	public void tearDown() throws Exception {
 		// check confirmation text
-		assertTrue("Submit was not sent",((driver.findElement(By.xpath("/html"))).getText()).contains("Information sent successfully!"));
+		assertTrue("Submit was not sent",((driver.findElement(By.xpath("/html"))).getText()).contains("Informações enviadas com sucesso!"));
 		driver.quit();
 	}
 
@@ -69,13 +69,17 @@ public class BigString {
 		driver.get("https://forms.liferay.com/web/forms/shared/-/form/122548");
 		driver.manage().window().maximize();
 		
+		//change to PT-BR
+		methodsRep.changeLang(driver);
+		driver.navigate().refresh();
+		Thread.sleep(1000);
 
 		methodsRep.fillName(bigString, driver);
-
+		Thread.sleep(1000);
 		methodsRep.fillDate(driver);
-		
+		Thread.sleep(1000);
 		methodsRep.fillAnswer(bigString, driver);
-		
+		Thread.sleep(1000);
 		methodsRep.submitForm(driver);
 
 	}
