@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class RequiredAnswerBR {
 
 	private WebDriver driver;
-	MethodsRepBR methodsRep = new MethodsRepBR();
+	MethodsRep methodsRep = new MethodsRep();
 
 	@Before
 	public void setUp() throws Exception {
@@ -29,9 +29,6 @@ public class RequiredAnswerBR {
 		//check "name" and "date" are warning about the Required info
 		assertTrue("'Required name' is missing",((driver.findElement(By.cssSelector(".col-md-7 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
 		assertTrue("'Required date' is missing",((driver.findElement(By.cssSelector(".col-md-5 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
-		
-		//check "answer" is not warning
-		assertFalse("'Required answer' should not appear",((driver.findElement(By.cssSelector(".col-md-12 > .form-group .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
 		
 		driver.quit();
 	}
@@ -63,11 +60,7 @@ public class RequiredAnswerBR {
 		
 		//check answer is not warning
 		assertTrue("'Required answer' is missing",((driver.findElement(By.cssSelector(".col-md-12 > .form-group .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
-		
-		//check name and date warnings
-		assertFalse("'Required name' should not appear",((driver.findElement(By.cssSelector(".col-md-7 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
-		assertFalse("'Required date' should not appear",((driver.findElement(By.cssSelector(".col-md-5 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
-		
+
 		// 2. Clear "name" and "date" fields and try to submit form only with "answer" field filled
 		
 		//Clear fields

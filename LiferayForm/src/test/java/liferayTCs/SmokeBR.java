@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class SmokeBR {
 	
 	private WebDriver driver;
-	MethodsRepBR methodsRep = new MethodsRepBR();
+	MethodsRep methodsRep = new MethodsRep();
 	
 	@Before
 	public void setUp() throws Exception {

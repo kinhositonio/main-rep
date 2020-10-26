@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class RequiredNameBR {
 
 	private WebDriver driver;
-	MethodsRepBR methodsRep = new MethodsRepBR();
+	MethodsRep methodsRep = new MethodsRep();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -29,14 +29,6 @@ public class RequiredNameBR {
 		//check "date" and "answer" are warning about the Required info
 		assertTrue("'Required date' is missing",((driver.findElement(By.cssSelector(".col-md-5 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
 		assertTrue("'Required answer' is missing",((driver.findElement(By.cssSelector(".col-md-12 > .form-group .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
-		
-		//check "name" is not warning
-		assertFalse("'Required name' should not appear",((driver.findElement(By.cssSelector(".col-md-7 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
-		
-		//check name and answer warnings
-		assertFalse("'Required date' should not appear",((driver.findElement(By.cssSelector(".col-md-5 .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
-		assertFalse("'Required answer' should not appear",((driver.findElement(By.cssSelector(".col-md-12 > .form-group .form-feedback-item"))).getText()).contains("Este campo é obrigatório."));
-				
 		
 		driver.quit();
 	}

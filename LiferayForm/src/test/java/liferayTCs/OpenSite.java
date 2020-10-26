@@ -12,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class OpenSite {
 	
 	private WebDriver driver;
-	MethodsRepBR methodsRep = new MethodsRepBR();
+	MethodsRep methodsRep = new MethodsRep();
 
 	@Before
 	public void setUp() throws Exception {
@@ -29,7 +29,8 @@ public class OpenSite {
 
 	@Test
 	public void test() throws InterruptedException {
-
+		
+		//THIS TC COVERS BOTH LANGUAGES
 		//open site
 		driver.get("https://forms.liferay.com/web/forms/shared/-/form/122548");
 		driver.manage().window().maximize();

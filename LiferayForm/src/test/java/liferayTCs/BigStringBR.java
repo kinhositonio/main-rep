@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BigStringBR {
 	
-	MethodsRepBR methodsRep = new MethodsRepBR();
+	MethodsRep methodsRep = new MethodsRep();
 
 	private WebDriver driver;
 
